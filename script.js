@@ -23,11 +23,6 @@ window.addEventListener("DOMContentLoaded", async function() {
         sectionDiv = document.createElement("div");
         sectionDiv.classList.add("translateSection");
         sectionDiv.id = section;
-        
-        //Section header.
-        const headerText = document.createElement("h3");
-        headerText.innerHTML = firstLetterUppercase(section.split("-").join(" "));
-        sectionDiv.appendChild(headerText);
 
         printTranslateEntries();
 
@@ -106,12 +101,17 @@ function endTranslation() {
 }
 
 function printTranslateEntries() {
+    //Section header.
+    const headerText = document.createElement("h3");
+    headerText.innerHTML = firstLetterUppercase(section.split("-").join(" "));
+    sectionDiv.appendChild(headerText);
+
     //Print section entries to translate.
     for (entry in sectionData) {
         const entryText = document.createElement("h5");
         if (!entry) continue; //If an entry's name is empty, skip it.
         entryText.innerHTML = sectionData[entry];
-        if (!sectionData[entry]) entryText.innerHTML = `${entry} [no default value given]`; //If an entry's value is empty, put a text indicating that.
+        if (!sectionData[entry]) entryText.innerHTML = `<i><u>${entry}</u> [no default value given]</i>`; //If an entry's value is empty, put a text indicating that.
         sectionDiv.appendChild(entryText);
 
         const textField = document.createElement("textarea");
